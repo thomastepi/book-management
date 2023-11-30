@@ -1,5 +1,5 @@
 import React from "react";
-import "../assets/header.css"
+import "../assets/defaultLayout.css";
 
 const DefaultLayout = (props) => {
   return (
@@ -8,8 +8,11 @@ const DefaultLayout = (props) => {
         <h1>BookHub!</h1>
       </div>
       <div className="content">{props.children}</div>
+      <div className="footer">
+        <p>© 2023 BookHub, Inc.</p>
+      </div>
     </div>
-    );
+  );
 };
 
 export default DefaultLayout;

@@ -22,4 +22,17 @@
     border-radius: 5px;
     box-shadow: 0 0 3px gray;
     padding: 10px;
-}   
+}
+
+.footer {
+    height: 10%;
+    background-color: black;
+    color: rgba(255, 255, 255, 0.500);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 22px;
+    margin-top: 20px;
+}
