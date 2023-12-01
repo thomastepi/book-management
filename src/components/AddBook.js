@@ -66,6 +66,7 @@ const AddBook = () => {
             type="text"
             name="numOfBooksToAdd"
             id="numOfBooksToAdd"
+            required
           />
           <button className="btn" type="submit">
             Submit
@@ -81,6 +82,7 @@ const AddBook = () => {
                 type="text"
                 name="title"
                 id="title"
+                required
               />
             </div>
             <div>
@@ -90,6 +92,7 @@ const AddBook = () => {
                 type="text"
                 name="author"
                 id="author"
+                required
               />
             </div>
             <div>
@@ -99,6 +102,7 @@ const AddBook = () => {
                 type="text"
                 name="price"
                 id="price"
+                required
               />
             </div>
 
