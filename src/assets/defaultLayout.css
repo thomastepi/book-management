@@ -16,7 +16,8 @@
 }
 
 .content {
-    height: 87%;
+    /* height: 100%; */
+    height: fit-content;
     border: 1px solid gray;
     margin-top: 20px;
     border-radius: 5px;

@@ -17,7 +17,7 @@ function App() {
           <Route path="/setup" element={<Setup />} />
           <Route path="/main-menu" element={<MainMenu />} />
           <Route path="/add-book" element={<AddBook />} />
-          <Route path="/update-book/:id" element={<UpdateBook />} />
+          <Route path="/update-book" element={<UpdateBook />} />
           <Route path="/show-book/:id" element={<ShowBook />} />
         </Routes>
       </BrowserRouter>

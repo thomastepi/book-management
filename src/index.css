@@ -1,26 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather&family=Montserrat:wght@200;400&family=Sacramento&display=swap');
-
-
-/* body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(216, 199, 199);
-  background-image: url("./assets/images/lib.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-} */
+@import url("https://fonts.googleapis.com/css2?family=Merriweather&family=Montserrat:wght@200;400&family=Sacramento&display=swap");
 
 body {
   position: relative;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -44,45 +28,12 @@ body::before {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-/* a {
-  text-decoration: none;
-  border: 1px solid black;  
-  padding: 5px;
-  border-radius: 7px;
-  color: black;
-  font-weight: bold;
-  font-size: 20px;
-  margin: 10px;
-} */
-
-/* a {
-  background: #b8b4b4;
-  background-image: -webkit-linear-gradient(top, #4e4948, #6b694f);
-  background-image: -moz-linear-gradient(top, #928785, #7c7b6b);
-  background-image: -ms-linear-gradient(top, #806f6b, #888778);
-  background-image: -o-linear-gradient(top, #706361, #918f7a);
-  background-image: linear-gradient(to bottom, #5a5655, #83816e);
-  -webkit-border-radius: 18;
-  -moz-border-radius: 18;
-  border: 1px solid black; 
-  border-radius: 18px;
-  font-family: inherit;
-  color: #07000a;
-  font-size: 20px;
-  padding: 5px 20px 5px 20px;
-  text-decoration: none;
-  margin: 15px;
-} */
-
-/* thead {
-  font-family: 'Sacramento', cursive;
-} */
-
-th, td {
+th,
+td {
   border: 3px solid black;
   line-height: 3;
 }
@@ -98,13 +49,21 @@ table {
   border-collapse: collapse;
   border: 3px solid black;
   margin: 70px auto;
-
-
 }
 
 form {
   line-height: 2;
   font-size: 25px;
+}
+
+h3 {
+  border-radius: 5px;
+  padding: 5px;
+  margin: 0 auto;
+  text-align: center;
+  width: fit-content;
+  border: 1px solid black;
+  background-color: rgb(172, 157, 157);
 }
 
 input {
@@ -124,7 +83,13 @@ input {
   text-align: right;
 }
 
-.btn, a {
+.update-book label {
+  line-height: 2;
+  font-size: 25px;
+}
+
+.btn,
+a {
   background: #b8b4b4;
   background-image: -webkit-linear-gradient(top, #4e4948, #6b694f);
   background-image: -moz-linear-gradient(top, #928785, #7c7b6b);
@@ -141,10 +106,10 @@ input {
   padding: 5px 20px 5px 20px;
   text-decoration: none;
   margin: 15px;
-
 }
 
-.btn:hover, a:hover {
+.btn:hover,
+a:hover {
   background: #55533e;
   text-decoration: none;
 }
