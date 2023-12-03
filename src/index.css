@@ -32,6 +32,45 @@ code {
     monospace;
 }
 
+select {
+  width: 10%;
+  padding: 8px 16px;
+  margin-bottom: 20px;
+  font-size: 25px;
+  border: 1px solid #000; /* Black border */
+  border-radius: 4px;
+  background-color: #a39393; /* White background */
+  color: #000; /* Black text color */
+  /* appearance: none; Remove default arrow */
+} 
+
+/* Optional: Hover and focus styles */
+select:hover,
+select:focus {
+  border-color: #555;
+}
+
+select option {
+  background-color: #fff; 
+  color: #000;
+  font-size: 20px;
+}
+
+select option:hover {
+  background-color: #ccc;
+}
+
+.update-field-container {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 th,
 td {
   border: 3px solid black;

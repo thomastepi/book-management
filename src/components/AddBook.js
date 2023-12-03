@@ -115,10 +115,10 @@ const AddBook = () => {
         )}
         {numOfBooksToAdd > maxNumberOfBooks && numOfBooksToAdd ? (
           <div>
-            <h2>
+            <h3>
               You have exceeded the maximum number of books allowed in the
               inventory. Please try again.
-            </h2>
+            </h3>
           </div>
         ) : (
           ""
