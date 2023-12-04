@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import DefaultLayout from "./DefaultLayout";
 import books from "../assets/books";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const UpdateBook = () => {
   const [bookList, setBookList] = useState(books);
   const [bookNumber, setBookNumber] = useState("");
   const [inputValue, setInputValue] = useState("");
-  const [bookToUpdate, setBookToUpdate] = useState({});
   const [newTitle, setNewTitle] = useState("");
   const [newAuthor, setNewAuthor] = useState("");
   const [newPrice, setNewPrice] = useState("");
   const [selectedField, setSelectedField] = useState("title");
+  const navigate = useNavigate();
 
   const handleFieldChange = (e) => {
     setSelectedField(e.target.value);
@@ -20,7 +20,7 @@ const UpdateBook = () => {
   const isValidPrice = (value) => {
     const floatValue = parseFloat(value);
     if (!isNaN(floatValue) && floatValue >= 0) {
-      const decimalCount = (floatValue.toString().split('.')[1] || '').length;
+      const decimalCount = (floatValue.toString().split(".")[1] || "").length;
       return decimalCount <= 2;
     }
     return false;
@@ -28,82 +28,73 @@ const UpdateBook = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (newTitle !== "") {
-      if(newAuthor === "" && newPrice === ""){
-        setBookList((prevBookList) => {
-          const updatedBookList = [...prevBookList];
-          updatedBookList[bookNumber - 1].title = newTitle;
-          return updatedBookList;
-        });
-        let id = bookNumber - 1;
-        for (let i = 0; i < books.length; i++) {
-          if (i === id) {
-            books[i].title = bookList[i].title;
+    if (isValidPrice(newPrice) === false && newPrice !== "") {
+      alert("Please enter a valid price");
+      setNewPrice("");
+      return;
+    }
+    var passwd = prompt("Enter password");
+    var attempts = 3;
+
+    while (attempts >= 1) {
+      if (passwd === "pargol") {
+        if (newTitle !== "") {
+          setBookList((prevBookList) => {
+            const updatedBookList = [...prevBookList];
+            updatedBookList[bookNumber - 1].title = newTitle;
+            return updatedBookList;
+          });
+          let id = bookNumber - 1;
+          for (let i = 0; i < books.length; i++) {
+            if (i === id) {
+              books[i].title = bookList[i].title;
+            }
           }
-        }
-        console.log(books);
-       } else {
-        alert("You can only update one field at a time");
-        setNewTitle("");
-        setNewAuthor("");
-        setNewPrice("");
-       }
-      
-    } else if (newAuthor !== "") {
-      if (newTitle === "" && newPrice === "") {
-        setBookList((prevBookList) => {
-          const updatedBookList = [...prevBookList];
-          updatedBookList[bookNumber - 1].author = newAuthor;
-          return updatedBookList;
-        });
-        let id = bookNumber - 1;
-        for (let i = 0; i < books.length; i++) {
-          if (i === id) {
-            books[i].author = bookList[i].author;
+          console.log(books);
+        } else if (newAuthor !== "") {
+          setBookList((prevBookList) => {
+            const updatedBookList = [...prevBookList];
+            updatedBookList[bookNumber - 1].author = newAuthor;
+            return updatedBookList;
+          });
+          let id = bookNumber - 1;
+          for (let i = 0; i < books.length; i++) {
+            if (i === id) {
+              books[i].author = bookList[i].author;
+            }
           }
+        } else if (newPrice !== "") {
+          setBookList((prevBookList) => {
+            const updatedBookList = [...prevBookList];
+            updatedBookList[bookNumber - 1].price = newPrice;
+            return updatedBookList;
+          });
+          let id = bookNumber - 1;
+          for (let i = 0; i < books.length; i++) {
+            if (i === id) {
+              books[i].price = bookList[i].price;
+            }
+          }
+        } else {
+          console.log("Something went wrong");
         }
-      } else {
-        alert("You can only update one field at a time");
-        setNewTitle("");
-        setNewAuthor("");
-        setNewPrice("");
+        return;
+      } else if (attempts > 1) {
+        alert(`Incorrect password. You have ${attempts - 1} attempts left.`);
+        passwd = prompt("Re-enter password");
       }
-    } else if (newPrice !== "") {
-      if (newTitle === "" && newAuthor === "") {
-        if (isValidPrice(newPrice) === false) {
-          alert("Please enter a valid price");
-          setNewPrice("");
-          return;
-        }
-        setBookList((prevBookList) => {
-          const updatedBookList = [...prevBookList];
-          updatedBookList[bookNumber - 1].price = newPrice;
-          return updatedBookList;
-        });
-        let id = bookNumber - 1;
-        for (let i = 0; i < books.length; i++) {
-          if (i === id) {
-            books[i].price = bookList[i].price;
-          }
-        }
-      } else {
-        alert("You can only update one field at a time");
-        setNewTitle("");
-        setNewAuthor("");
-        setNewPrice("");
-      }
-    } else {
-      console.log("Something went wrong");
+      attempts--;
+    }
+
+    if (attempts === 0) {
+      alert("You have run out of attempts. Please try again later.");
+      navigate("/main-menu");
     }
   };
 
   const handleClick = (e) => {
     e.preventDefault();
-    //console.log("clicked");
     setBookNumber(inputValue);
-    console.log(bookNumber);
-    setBookToUpdate(bookList[bookNumber - 1]);
-    console.log(bookToUpdate);
   };
 
   // reset input values after submit
@@ -111,8 +102,6 @@ const UpdateBook = () => {
     setNewTitle("");
     setNewAuthor("");
     setNewPrice("");
-    // setInputValue("");
-    // setBookNumber("");
   }, [bookList]);
   return (
     <div className="update-book">
@@ -126,6 +115,7 @@ const UpdateBook = () => {
             name="book-number"
             id="book-number"
             value={inputValue}
+            required
           />
           <button onClick={handleClick} type="submit" className="btn">
             Submit
@@ -134,58 +124,64 @@ const UpdateBook = () => {
             <>
               <h3>
                 You have selected <em> {bookList[bookNumber - 1].title} </em> by
-                <em> {bookList[bookNumber - 1].author} </em>{" "}
+                <em> {bookList[bookNumber - 1].author}</em>. Price of book:{" "}
+                {<em> ${bookList[bookNumber - 1].price} </em>}
               </h3>
               <div className="update-field-container">
-              <h4>What field would you like to update?</h4>
-              <select value={selectedField} onChange={handleFieldChange}>
-                <option value="title">Title</option>
-                <option value="author">Author</option>
-                <option value="price">Price</option>
-              </select>
-              <form className="add-book-form" onSubmit={handleSubmit}>
-                <div>
-                {selectedField === "title" ? (
-                  <input
-                    value={newTitle}
-                    onChange={(e) => setNewTitle(e.target.value)}
-                    placeholder="Enter new title"
-                    type="text"
-                    name="title"
-                    id="title"
-                  />
-                ) : ""}
-                </div>
-                <div>
-                {selectedField === "author" ? (
-                  <input
-                    value={newAuthor}
-                    onChange={(e) => setNewAuthor(e.target.value)}
-                    placeholder="Enter new author"
-                    type="text"
-                    name="author"
-                    id="author"
-                  />
-                ) : ""}
-                </div>
-                <div>
-                {selectedField === "price" ? (
-                  <input
-                    value={newPrice}
-                    onChange={(e) => setNewPrice(e.target.value)}
-                    placeholder="Enter new price"
-                    type="text"
-                    name="price"
-                    id="price"
-                  />
-                ) : ""}
-                </div>
-                <button type="submit" className="btn">
-                  Update Book
-                </button>
-              </form>
+                <h4>What field would you like to update?</h4>
+                <select value={selectedField} onChange={handleFieldChange}>
+                  <option value="title">Title</option>
+                  <option value="author">Author</option>
+                  <option value="price">Price</option>
+                </select>
+                <form className="add-book-form" onSubmit={handleSubmit}>
+                  <div>
+                    {selectedField === "title" ? (
+                      <input
+                        value={newTitle}
+                        onChange={(e) => setNewTitle(e.target.value)}
+                        placeholder="Enter new title"
+                        type="text"
+                        name="title"
+                        id="title"
+                      />
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <div>
+                    {selectedField === "author" ? (
+                      <input
+                        value={newAuthor}
+                        onChange={(e) => setNewAuthor(e.target.value)}
+                        placeholder="Enter new author"
+                        type="text"
+                        name="author"
+                        id="author"
+                      />
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <div>
+                    {selectedField === "price" ? (
+                      <input
+                        value={newPrice}
+                        onChange={(e) => setNewPrice(e.target.value)}
+                        placeholder="Enter new price"
+                        type="text"
+                        name="price"
+                        id="price"
+                      />
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <button type="submit" className="btn">
+                    Update Book
+                  </button>
+                </form>
               </div>
-              
             </>
           ) : (
             ""
@@ -223,7 +219,7 @@ const UpdateBook = () => {
             </tbody>
           </table>
         </div>
-        <Link style={{marginTop: "20px"}} to="/main-menu" className="btn">
+        <Link style={{ marginTop: "20px" }} to="/main-menu" className="btn">
           Main Menu
         </Link>
       </DefaultLayout>

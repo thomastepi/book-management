@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import books from "../assets/books";
 import DefaultLayout from "./DefaultLayout";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,35 +8,64 @@ const AddBook = () => {
   const [bookList, setBookList] = useState(books);
   const [numOfBooksToAdd, setNumOfBooksToAdd] = useState("");
   const [inputValue, setInputValue] = useState("");
+  const [bookTitle, setBookTitle] = useState("");
+  const [bookAuthor, setBookAuthor] = useState("");
+  const [bookPrice, setBookPrice] = useState("");
+  const [addSuccessfull, setAddSuccessfull] = useState(false);
   const navigate = useNavigate();
 
   const maxNumberOfBooks = localStorage.getItem("maxNumberOfBooks");
 
-  const handleChange = (e) => {
-    setBook({ ...book, [e.target.name]: e.target.value });
-  };
   const handleSubmit2 = (e) => {
     e.preventDefault();
     setNumOfBooksToAdd(inputValue);
   };
+
+  const isValidPrice = (value) => {
+    const floatValue = parseFloat(value);
+    if (!isNaN(floatValue) && floatValue >= 0) {
+      const decimalCount = (floatValue.toString().split(".")[1] || "").length;
+      return decimalCount <= 2;
+    }
+    return false;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (isValidPrice(bookPrice) === false) {
+      alert("Please enter a valid price");
+      setBookPrice("");
+      return;
+    }
     var passwd = prompt("Enter password");
     var attempts = 3;
 
     while (attempts >= 1) {
       if (passwd === "pargol") {
         if (books.length < numOfBooksToAdd) {
+          console.log(book);
           books.push(book);
           const updatedBookList = [...bookList, book];
           setBookList(updatedBookList);
           console.log(updatedBookList);
           console.log(books);
+          setAddSuccessfull(true);
+          setTimeout(() => {
+            setAddSuccessfull(false);
+            //alert("Book has been added to the inventory.");
+            setBookTitle("");
+            setBookAuthor("");
+            setBookPrice("");
+            //navigate("/main-menu");
+          }, 3000);
           return;
         } else {
           alert(
             `You have exceeded the maximum number of books allowed in the inventory.`
           );
+          setBookTitle("");
+          setBookAuthor("");
+          setBookPrice("");
           //navigate("/main-menu");
           return;
         }
@@ -52,6 +80,14 @@ const AddBook = () => {
       navigate("/main-menu");
     }
   };
+
+
+  useEffect(() => {
+    setBookTitle("");
+    setBookAuthor("");
+    setBookPrice("");
+    //setAddSuccessfull(false);
+  }, [bookList]);
   return (
     <div className="add-book">
       <DefaultLayout>
@@ -78,7 +114,11 @@ const AddBook = () => {
             <div>
               <label htmlFor="title">Title</label>
               <input
-                onChange={handleChange}
+                value={bookTitle}
+                onChange={(e) => {
+                  setBookTitle(e.target.value);
+                  setBook({ ...book, [e.target.name]: e.target.value });
+                }}
                 type="text"
                 name="title"
                 id="title"
@@ -88,7 +128,11 @@ const AddBook = () => {
             <div>
               <label htmlFor="author">Author</label>
               <input
-                onChange={handleChange}
+                value={bookAuthor}
+                onChange={(e) => {
+                  setBookAuthor(e.target.value);
+                  setBook({ ...book, [e.target.name]: e.target.value });
+                }}
                 type="text"
                 name="author"
                 id="author"
@@ -98,7 +142,11 @@ const AddBook = () => {
             <div>
               <label htmlFor="price">Price</label>
               <input
-                onChange={handleChange}
+                value={bookPrice}
+                onChange={(e) => {
+                  setBookPrice(e.target.value);
+                  setBook({ ...book, [e.target.name]: e.target.value });
+                }}
                 type="text"
                 name="price"
                 id="price"
@@ -125,6 +173,11 @@ const AddBook = () => {
         )}
 
         <div style={{ margin: "20px" }}>
+        {addSuccessfull && (
+          <div>
+            <h3>Book added successfully.</h3>
+            </div>
+            )}
           <table style={{ margin: "0 auto", border: "1px solid black" }}>
             <thead>
               <tr>

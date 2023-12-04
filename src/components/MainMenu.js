@@ -11,7 +11,8 @@ const MainMenu = () => {
         <h2>Books</h2>
         <Link to="/add-book">Add Book</Link>
         <Link to="/update-book">Update Book</Link>
-        <Link to="/show-book">Show Book</Link>
+        <Link to="/show-book-author">Search Book by author</Link>
+        <Link to="/show-book-price">Search Book by price</Link>
         <h2>Current Inventory</h2>
         <div>
           <table style={{ margin: "0 auto", border: "1px solid black" }}>

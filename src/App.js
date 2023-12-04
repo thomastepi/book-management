@@ -5,7 +5,8 @@ import Setup from './components/Setup';
 import MainMenu from './components/MainMenu';
 import AddBook from './components/AddBook';
 import UpdateBook from './components/UpdateBook';
-import ShowBook from './components/ShowBook';
+import ShowBookByAuthor from './components/ShowBookByAuthor';
+import ShowBookByPrice from './components/ShowBookByPrice';
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
           <Route path="/main-menu" element={<MainMenu />} />
           <Route path="/add-book" element={<AddBook />} />
           <Route path="/update-book" element={<UpdateBook />} />
-          <Route path="/show-book/:id" element={<ShowBook />} />
+          <Route path="/show-book-author" element={<ShowBookByAuthor />} />
+          <Route path="/show-book-price" element={<ShowBookByPrice />} />
         </Routes>
       </BrowserRouter>
     </div>

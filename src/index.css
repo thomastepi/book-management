@@ -23,7 +23,7 @@ body::before {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  opacity: 0.2; /* Adjust as needed */
+  opacity: 0.2;
   z-index: -1;
 }
 
@@ -37,21 +37,19 @@ select {
   padding: 8px 16px;
   margin-bottom: 20px;
   font-size: 25px;
-  border: 1px solid #000; /* Black border */
+  border: 1px solid #000;
   border-radius: 4px;
-  background-color: #a39393; /* White background */
-  color: #000; /* Black text color */
-  /* appearance: none; Remove default arrow */
-} 
+  background-color: #a39393;
+  color: #000;
+}
 
-/* Optional: Hover and focus styles */
 select:hover,
 select:focus {
   border-color: #555;
 }
 
 select option {
-  background-color: #fff; 
+  background-color: #fff;
   color: #000;
   font-size: 20px;
 }
@@ -98,7 +96,7 @@ form {
 h3 {
   border-radius: 5px;
   padding: 5px;
-  margin: 0 auto;
+  margin: 10px auto 10px auto;
   text-align: center;
   width: fit-content;
   border: 1px solid black;

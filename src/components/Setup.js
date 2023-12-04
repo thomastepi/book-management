@@ -10,7 +10,7 @@ const Setup = () => {
   useEffect(() => {
     const storedMaxNumberOfBooks = localStorage.getItem("maxNumberOfBooks");
     if (storedMaxNumberOfBooks) {
-      setCurrentMaxNumberOfBooks(Number(storedMaxNumberOfBooks)); // Convert to number if needed
+      setCurrentMaxNumberOfBooks(Number(storedMaxNumberOfBooks));
     }
   }, [currentMaxNumberOfBooks]);
 
@@ -33,6 +33,7 @@ const Setup = () => {
             type="text"
             name="maxNumberOfBooks"
             id="maxNumberOfBooks"
+            required
           />
           <button className="btn" type="submit">
             Submit
