@@ -144,6 +144,7 @@ const UpdateBook = () => {
                         type="text"
                         name="title"
                         id="title"
+                        required
                       />
                     ) : (
                       ""
@@ -158,6 +159,7 @@ const UpdateBook = () => {
                         type="text"
                         name="author"
                         id="author"
+                        required
                       />
                     ) : (
                       ""
@@ -172,6 +174,7 @@ const UpdateBook = () => {
                         type="text"
                         name="price"
                         id="price"
+                        required
                       />
                     ) : (
                       ""
