@@ -128,6 +128,7 @@ const AddBook = () => {
 
         {parseInt(numOfBooksToAdd) <= maxBooks && numOfBooksToAdd > 0 ? (
           <form className="add-book-form" onSubmit={handleSubmit}>
+          <h4>Number of books to add: {numOfBooksToAdd}</h4>
             <div>
               <label htmlFor="title">Title</label>
               <input
