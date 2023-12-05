@@ -7,6 +7,7 @@ import AddBook from "./components/AddBook";
 import UpdateBook from "./components/UpdateBook";
 import Quit from "./components/Quit";
 import QuitMessage from "./components/QuitMessage";
+import SearchBook from "./components/SearchBook";
 import ShowBookByAuthor from "./components/ShowBookByAuthor";
 import ShowBookByPrice from "./components/ShowBookByPrice";
 import { BookProvider } from "./assets/BookContext";
@@ -23,6 +24,7 @@ function App() {
             <Route path="/main-menu" element={<MainMenu />} />
             <Route path="/add-book" element={<AddBook />} />
             <Route path="/update-book" element={<UpdateBook />} />
+            <Route path="/search-book" element={<SearchBook />} />
             <Route path="/quit" element={<Quit />} />
             <Route path="/quit-message" element={<QuitMessage />} />
             <Route path="/show-book-author" element={<ShowBookByAuthor />} />

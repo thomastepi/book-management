@@ -11,8 +11,7 @@ const MainMenu = () => {
         <h2>Select from one of the following options</h2>
         <Link to="/add-book">Add Book</Link>
         <Link to="/update-book">Update Book</Link>
-        <Link to="/show-book-author">Search Book by author</Link>
-        <Link to="/show-book-price">Search Book by price</Link>
+        <Link to="/search-book">Search Book</Link>
         <Link to="/quit">Quit</Link>
         <h2>Current Inventory</h2>
         <div>
