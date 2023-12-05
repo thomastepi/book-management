@@ -8,7 +8,7 @@ const MainMenu = () => {
     <div className="main-menu">
       <DefaultLayout>
         <h1>What do you wish to do</h1>
-        <h2>Books</h2>
+        <h2>Select from one of the following options</h2>
         <Link to="/add-book">Add Book</Link>
         <Link to="/update-book">Update Book</Link>
         <Link to="/show-book-author">Search Book by author</Link>

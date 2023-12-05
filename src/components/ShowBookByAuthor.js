@@ -42,7 +42,9 @@ const ShowBookByAuthor = () => {
             }}
             required
           />
-          <button type="submit" className="btn">Submit</button>
+          <button type="submit" className="btn">
+            Submit
+          </button>
         </form>
         {matchFound ? (
           <div style={{ margin: "20px" }}>

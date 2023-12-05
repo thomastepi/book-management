@@ -3,6 +3,7 @@ import books from "../assets/books";
 import DefaultLayout from "./DefaultLayout";
 import BookClass from "../assets/BookClass";
 import { Link, useNavigate } from "react-router-dom";
+import info from "../assets/data";
 import BookContext from "../assets/BookContext";
 
 const AddBook = () => {
@@ -16,7 +17,7 @@ const AddBook = () => {
   const { setBookInstance } = useContext(BookContext);
   const navigate = useNavigate();
 
-  const maxNumberOfBooks = localStorage.getItem("maxNumberOfBooks");
+  const maxBooks = info[info.length - 1];
 
   const handleSubmit2 = (e) => {
     e.preventDefault();
@@ -38,6 +39,7 @@ const AddBook = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(maxBooks);
     if (isValidPrice(bookPrice) === false) {
       alert("Please enter a valid price");
       setBookPrice("");
@@ -106,6 +108,7 @@ const AddBook = () => {
     <div className="add-book">
       <DefaultLayout>
         <h1>Add a book</h1>
+        <h2>Maximum number of books allowed in the inventory: {maxBooks}</h2>
         <form onSubmit={handleSubmit2}>
           <label htmlFor="numOfBooksToAdd">Number of Books to add</label>
           <input
@@ -123,7 +126,7 @@ const AddBook = () => {
           </button>
         </form>
 
-        {numOfBooksToAdd <= maxNumberOfBooks && numOfBooksToAdd ? (
+        {numOfBooksToAdd <= maxBooks && numOfBooksToAdd > 0 ? (
           <form className="add-book-form" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="title">Title</label>
@@ -185,11 +188,22 @@ const AddBook = () => {
         ) : (
           ""
         )}
-        {numOfBooksToAdd > maxNumberOfBooks && numOfBooksToAdd ? (
+
+        {numOfBooksToAdd < 1 && numOfBooksToAdd ? (
           <div>
             <h3>
-              You have exceeded the maximum number of books allowed in the
-              inventory. Please try again.
+              The number of books you wish to add must be greater than 0. Please
+              try again.
+            </h3>
+          </div>
+        ) : (
+          ""
+        )}
+        {numOfBooksToAdd > maxBooks && numOfBooksToAdd ? (
+          <div>
+            <h3>
+              The number of books you wish to add must be less than the maximum
+              number of books allowed in the inventory. Please try again.
             </h3>
           </div>
         ) : (

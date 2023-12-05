@@ -3,7 +3,6 @@ import DefaultLayout from "./DefaultLayout";
 import books from "../assets/books";
 import { Link, useNavigate } from "react-router-dom";
 
-
 const UpdateBook = () => {
   const [bookList, setBookList] = useState(books);
   const [bookNumber, setBookNumber] = useState("");
@@ -30,7 +29,7 @@ const UpdateBook = () => {
 
   const isValidISBN = (isbn) => {
     return /^\d+$/.test(isbn);
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -66,7 +65,10 @@ const UpdateBook = () => {
         } else if (newAuthor !== "") {
           setBookList((prevBookList) => {
             const updatedBookList = [...prevBookList];
-            updatedBookList[bookNumber - 1].modifyAttribute("author", newAuthor);
+            updatedBookList[bookNumber - 1].modifyAttribute(
+              "author",
+              newAuthor
+            );
             return updatedBookList;
           });
           let id = bookNumber - 1;
@@ -75,7 +77,7 @@ const UpdateBook = () => {
               books[i].author = bookList[i].author;
             }
           }
-        } else if (newISBN !== ""){
+        } else if (newISBN !== "") {
           setBookList((prevBookList) => {
             const updatedBookList = [...prevBookList];
             updatedBookList[bookNumber - 1].modifyAttribute("ISBN", newISBN);
@@ -87,8 +89,7 @@ const UpdateBook = () => {
               books[i].ISBN = bookList[i].ISBN;
             }
           }
-        }
-         else if (newPrice !== "") {
+        } else if (newPrice !== "") {
           setBookList((prevBookList) => {
             const updatedBookList = [...prevBookList];
             updatedBookList[bookNumber - 1].modifyAttribute("price", newPrice);
@@ -266,9 +267,7 @@ const UpdateBook = () => {
             </tbody>
           </table>
         </div>
-        <Link to="/main-menu">
-          Return to Main Menu
-        </Link>
+        <Link to="/main-menu">Return to Main Menu</Link>
       </DefaultLayout>
     </div>
   );

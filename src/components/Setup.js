@@ -1,25 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import info from "../assets/data";
 import DefaultLayout from "./DefaultLayout";
 
 const Setup = () => {
-  const [maxNumberOfBooks, setMaxNumberOfBooks] = useState("");
-  const [currentMaxNumberOfBooks, setCurrentMaxNumberOfBooks] = useState("");
-  //const [maxBooks, setMaxBooks] = useState(false);
-
-  useEffect(() => {
-    const storedMaxNumberOfBooks = localStorage.getItem("maxNumberOfBooks");
-    if (storedMaxNumberOfBooks) {
-      setCurrentMaxNumberOfBooks(Number(storedMaxNumberOfBooks));
-    }
-  }, [currentMaxNumberOfBooks]);
+  const [maxBooks, setMaxBooks] = useState("");
+  const [inputValue, setInputValue] = useState("");
 
   const handleSubmit = (e) => {
-    //e.preventDefault();
-    localStorage.setItem("maxNumberOfBooks", maxNumberOfBooks);
-    console.log(localStorage.getItem("maxNumberOfBooks"));
-    //setMaxBooks(true);
-    // setMaxNumberOfBooks("");
+    e.preventDefault();
+    setMaxBooks(inputValue);
+    info.push(inputValue);
+    console.log(info);
   };
 
   return (
@@ -29,7 +21,8 @@ const Setup = () => {
         <form onSubmit={handleSubmit}>
           <label htmlFor="maxNumberOfBooks">Maximum number of books</label>
           <input
-            onChange={(e) => setMaxNumberOfBooks(e.target.value)}
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
             type="text"
             name="maxNumberOfBooks"
             id="maxNumberOfBooks"
@@ -38,16 +31,22 @@ const Setup = () => {
           <button className="btn" type="submit">
             Submit
           </button>
-          {currentMaxNumberOfBooks && (
-            <div>
-              <h2>
-                Maximum number of books has been set to{" "}
-                {currentMaxNumberOfBooks}
-              </h2>
-            </div>
-          )}
         </form>
-        <Link to="/main-menu">Main Menu</Link>
+        {info.length > 0 && maxBooks >= 1 ? (
+          <div>
+            <h2>Maximum number of books has been set to {maxBooks}</h2>
+            <Link to="/main-menu">Main Menu</Link>
+          </div>
+        ) : (
+          ""
+        )}
+        {info.length > 0 && maxBooks < 1 && maxBooks !== "" ? (
+          <div>
+            <h2>Maximum number of books must be greater than 0</h2>
+          </div>
+        ) : (
+          ""
+        )}
       </DefaultLayout>
     </div>
   );

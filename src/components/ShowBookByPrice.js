@@ -27,7 +27,9 @@ const ShowBookByPrice = () => {
       return;
     }
     for (let i = 0; i < bookList.length; i++) {
-      if (parseFloat(bookList[i].getAttributeValue("price")) < parseFloat(price)) {
+      if (
+        parseFloat(bookList[i].getAttributeValue("price")) < parseFloat(price)
+      ) {
         bookFound.push(bookList[i]);
         setBookMatches(bookFound);
       }

@@ -1,5 +1,3 @@
-const books = [
-    
-]
+const books = [];
 
 export default books;

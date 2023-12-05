@@ -1,3 +1,3 @@
-var maxNumberOfBooks = '';
+var info = [];
 
-export default maxNumberOfBooks;
+export default info;
