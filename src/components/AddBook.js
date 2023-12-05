@@ -76,7 +76,7 @@ const AddBook = () => {
           return;
         } else {
           alert(
-            `You have exceeded the maximum number of books allowed in the inventory.`
+            `The inventory already contains the total number of books you indicated.`
           );
           setBookTitle("");
           setBookAuthor("");
@@ -126,7 +126,7 @@ const AddBook = () => {
           </button>
         </form>
 
-        {numOfBooksToAdd <= maxBooks && numOfBooksToAdd > 0 ? (
+        {parseInt(numOfBooksToAdd) <= maxBooks && numOfBooksToAdd > 0 ? (
           <form className="add-book-form" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="title">Title</label>
@@ -189,7 +189,7 @@ const AddBook = () => {
           ""
         )}
 
-        {numOfBooksToAdd < 1 && numOfBooksToAdd ? (
+        {parseInt(numOfBooksToAdd) < 1 && numOfBooksToAdd ? (
           <div>
             <h3>
               The number of books you wish to add must be greater than 0. Please
@@ -199,7 +199,7 @@ const AddBook = () => {
         ) : (
           ""
         )}
-        {numOfBooksToAdd > maxBooks && numOfBooksToAdd ? (
+        {parseInt(numOfBooksToAdd) > maxBooks && numOfBooksToAdd ? (
           <div>
             <h3>
               The number of books you wish to add must be less than the maximum
