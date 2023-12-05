@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import books from "../assets/books";
 import DefaultLayout from "./DefaultLayout";
+import BookClass from "../assets/BookClass";
 import { Link, useNavigate } from "react-router-dom";
+import BookContext from "../assets/BookContext";
 
 const AddBook = () => {
-  const [book, setBook] = useState({ title: "", author: "", price: "" });
-  const [bookList, setBookList] = useState(books);
   const [numOfBooksToAdd, setNumOfBooksToAdd] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [bookTitle, setBookTitle] = useState("");
   const [bookAuthor, setBookAuthor] = useState("");
+  const [ISBN, setISBN] = useState("");
   const [bookPrice, setBookPrice] = useState("");
   const [addSuccessfull, setAddSuccessfull] = useState(false);
+  const { setBookInstance } = useContext(BookContext);
   const navigate = useNavigate();
 
   const maxNumberOfBooks = localStorage.getItem("maxNumberOfBooks");
@@ -30,11 +32,20 @@ const AddBook = () => {
     return false;
   };
 
+  const isValidISBN = (isbn) => {
+    return /^\d+$/.test(isbn);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isValidPrice(bookPrice) === false) {
       alert("Please enter a valid price");
       setBookPrice("");
+      return;
+    }
+    if (isValidISBN(ISBN) === false) {
+      alert("Please enter a valid ISBN");
+      setISBN("");
       return;
     }
     var passwd = prompt("Enter password");
@@ -43,21 +54,23 @@ const AddBook = () => {
     while (attempts >= 1) {
       if (passwd === "pargol") {
         if (books.length < numOfBooksToAdd) {
-          console.log(book);
-          books.push(book);
-          const updatedBookList = [...bookList, book];
-          setBookList(updatedBookList);
-          console.log(updatedBookList);
-          console.log(books);
+          const bookInstance = new BookClass(
+            bookTitle,
+            bookAuthor,
+            ISBN,
+            bookPrice
+          );
+          setBookInstance(bookInstance);
+          books.push(bookInstance);
           setAddSuccessfull(true);
           setTimeout(() => {
             setAddSuccessfull(false);
-            //alert("Book has been added to the inventory.");
             setBookTitle("");
             setBookAuthor("");
             setBookPrice("");
+            setISBN("");
             //navigate("/main-menu");
-          }, 3000);
+          }, 2000);
           return;
         } else {
           alert(
@@ -66,6 +79,7 @@ const AddBook = () => {
           setBookTitle("");
           setBookAuthor("");
           setBookPrice("");
+          setISBN("");
           //navigate("/main-menu");
           return;
         }
@@ -81,13 +95,13 @@ const AddBook = () => {
     }
   };
 
-
   useEffect(() => {
     setBookTitle("");
     setBookAuthor("");
     setBookPrice("");
-    //setAddSuccessfull(false);
-  }, [bookList]);
+    setISBN("");
+  }, []);
+
   return (
     <div className="add-book">
       <DefaultLayout>
@@ -117,7 +131,6 @@ const AddBook = () => {
                 value={bookTitle}
                 onChange={(e) => {
                   setBookTitle(e.target.value);
-                  setBook({ ...book, [e.target.name]: e.target.value });
                 }}
                 type="text"
                 name="title"
@@ -131,11 +144,23 @@ const AddBook = () => {
                 value={bookAuthor}
                 onChange={(e) => {
                   setBookAuthor(e.target.value);
-                  setBook({ ...book, [e.target.name]: e.target.value });
                 }}
                 type="text"
                 name="author"
                 id="author"
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="ISBN">ISBN</label>
+              <input
+                value={ISBN}
+                onChange={(e) => {
+                  setISBN(e.target.value);
+                }}
+                type="text"
+                name="ISBN"
+                id="ISBN"
                 required
               />
             </div>
@@ -145,7 +170,6 @@ const AddBook = () => {
                 value={bookPrice}
                 onChange={(e) => {
                   setBookPrice(e.target.value);
-                  setBook({ ...book, [e.target.name]: e.target.value });
                 }}
                 type="text"
                 name="price"
@@ -173,16 +197,17 @@ const AddBook = () => {
         )}
 
         <div style={{ margin: "20px" }}>
-        {addSuccessfull && (
-          <div>
-            <h3>Book added successfully.</h3>
+          {addSuccessfull && (
+            <div>
+              <h3>Book added successfully.</h3>
             </div>
-            )}
+          )}
           <table style={{ margin: "0 auto", border: "1px solid black" }}>
             <thead>
               <tr>
                 <th>Title</th>
                 <th>Author</th>
+                <th>ISBN</th>
                 <th>Price</th>
               </tr>
             </thead>
@@ -191,6 +216,7 @@ const AddBook = () => {
                 <tr key={index}>
                   <td style={{ border: "1px solid black" }}>{book.title}</td>
                   <td style={{ border: "1px solid black" }}>{book.author}</td>
+                  <td style={{ border: "1px solid black" }}>{book.ISBN}</td>
                   <td style={{ border: "1px solid black" }}>${book.price}</td>
                 </tr>
               ))}

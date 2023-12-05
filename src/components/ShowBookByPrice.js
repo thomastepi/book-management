@@ -27,7 +27,7 @@ const ShowBookByPrice = () => {
       return;
     }
     for (let i = 0; i < bookList.length; i++) {
-      if (bookList[i].price === price) {
+      if (parseFloat(bookList[i].getAttributeValue("price")) < parseFloat(price)) {
         bookFound.push(bookList[i]);
         setBookMatches(bookFound);
       }
@@ -40,7 +40,6 @@ const ShowBookByPrice = () => {
         setBookMatches([]);
       }, 4000);
     }
-    console.log(bookMatches);
   };
 
   return (
@@ -68,6 +67,7 @@ const ShowBookByPrice = () => {
                 <tr>
                   <th>Title</th>
                   <th>Author</th>
+                  <th>ISBN</th>
                   <th>Price</th>
                 </tr>
               </thead>
@@ -76,6 +76,7 @@ const ShowBookByPrice = () => {
                   <tr key={index}>
                     <td style={{ border: "1px solid black" }}>{item.title}</td>
                     <td style={{ border: "1px solid black" }}>{item.author}</td>
+                    <td style={{ border: "1px solid black" }}>{item.ISBN}</td>
                     <td style={{ border: "1px solid black" }}>${item.price}</td>
                   </tr>
                 ))}
@@ -83,7 +84,7 @@ const ShowBookByPrice = () => {
             </table>
           </div>
         ) : (
-          <h2>No books found with price of ${price}</h2>
+          <h2>No books found with price less than ${price}</h2>
         )}
 
         <Link to="/main-menu">Return to Main Menu</Link>

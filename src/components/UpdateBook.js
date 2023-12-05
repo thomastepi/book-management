@@ -3,12 +3,14 @@ import DefaultLayout from "./DefaultLayout";
 import books from "../assets/books";
 import { Link, useNavigate } from "react-router-dom";
 
+
 const UpdateBook = () => {
   const [bookList, setBookList] = useState(books);
   const [bookNumber, setBookNumber] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [newTitle, setNewTitle] = useState("");
   const [newAuthor, setNewAuthor] = useState("");
+  const [newISBN, setNewISBN] = useState("");
   const [newPrice, setNewPrice] = useState("");
   const [selectedField, setSelectedField] = useState("title");
   const navigate = useNavigate();
@@ -26,11 +28,21 @@ const UpdateBook = () => {
     return false;
   };
 
+  const isValidISBN = (isbn) => {
+    return /^\d+$/.test(isbn);
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isValidPrice(newPrice) === false && newPrice !== "") {
       alert("Please enter a valid price");
       setNewPrice("");
+      return;
+    }
+
+    if (isValidISBN(newISBN) === false && newISBN !== "") {
+      alert("Please enter a valid ISBN");
+      setNewISBN("");
       return;
     }
     var passwd = prompt("Enter password");
@@ -41,7 +53,7 @@ const UpdateBook = () => {
         if (newTitle !== "") {
           setBookList((prevBookList) => {
             const updatedBookList = [...prevBookList];
-            updatedBookList[bookNumber - 1].title = newTitle;
+            updatedBookList[bookNumber - 1].modifyAttribute("title", newTitle);
             return updatedBookList;
           });
           let id = bookNumber - 1;
@@ -54,7 +66,7 @@ const UpdateBook = () => {
         } else if (newAuthor !== "") {
           setBookList((prevBookList) => {
             const updatedBookList = [...prevBookList];
-            updatedBookList[bookNumber - 1].author = newAuthor;
+            updatedBookList[bookNumber - 1].modifyAttribute("author", newAuthor);
             return updatedBookList;
           });
           let id = bookNumber - 1;
@@ -63,10 +75,23 @@ const UpdateBook = () => {
               books[i].author = bookList[i].author;
             }
           }
-        } else if (newPrice !== "") {
+        } else if (newISBN !== ""){
           setBookList((prevBookList) => {
             const updatedBookList = [...prevBookList];
-            updatedBookList[bookNumber - 1].price = newPrice;
+            updatedBookList[bookNumber - 1].modifyAttribute("ISBN", newISBN);
+            return updatedBookList;
+          });
+          let id = bookNumber - 1;
+          for (let i = 0; i < books.length; i++) {
+            if (i === id) {
+              books[i].ISBN = bookList[i].ISBN;
+            }
+          }
+        }
+         else if (newPrice !== "") {
+          setBookList((prevBookList) => {
+            const updatedBookList = [...prevBookList];
+            updatedBookList[bookNumber - 1].modifyAttribute("price", newPrice);
             return updatedBookList;
           });
           let id = bookNumber - 1;
@@ -101,6 +126,7 @@ const UpdateBook = () => {
   useEffect(() => {
     setNewTitle("");
     setNewAuthor("");
+    setNewISBN("");
     setNewPrice("");
   }, [bookList]);
   return (
@@ -132,6 +158,7 @@ const UpdateBook = () => {
                 <select value={selectedField} onChange={handleFieldChange}>
                   <option value="title">Title</option>
                   <option value="author">Author</option>
+                  <option value="ISBN">ISBN</option>
                   <option value="price">Price</option>
                 </select>
                 <form className="add-book-form" onSubmit={handleSubmit}>
@@ -159,6 +186,21 @@ const UpdateBook = () => {
                         type="text"
                         name="author"
                         id="author"
+                        required
+                      />
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <div>
+                    {selectedField === "ISBN" ? (
+                      <input
+                        value={newISBN}
+                        onChange={(e) => setNewISBN(e.target.value)}
+                        placeholder="Enter new ISBN"
+                        type="text"
+                        name="ISBN"
+                        id="ISBN"
                         required
                       />
                     ) : (
@@ -199,7 +241,7 @@ const UpdateBook = () => {
           )}
         </div>
 
-        <div>
+        <div style={{ margin: "20px" }}>
           <h2>Current Inventory</h2>
           <table style={{ margin: "0 auto", border: "1px solid black" }}>
             <thead>
@@ -207,6 +249,7 @@ const UpdateBook = () => {
                 <th>Number</th>
                 <th>Title</th>
                 <th>Author</th>
+                <th>ISBN</th>
                 <th>Price</th>
               </tr>
             </thead>
@@ -216,14 +259,15 @@ const UpdateBook = () => {
                   <td style={{ border: "1px solid black" }}>{index + 1}</td>
                   <td style={{ border: "1px solid black" }}>{book.title}</td>
                   <td style={{ border: "1px solid black" }}>{book.author}</td>
+                  <td style={{ border: "1px solid black" }}>{book.ISBN}</td>
                   <td style={{ border: "1px solid black" }}>${book.price}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        <Link style={{ marginTop: "20px" }} to="/main-menu" className="btn">
-          Main Menu
+        <Link to="/main-menu">
+          Return to Main Menu
         </Link>
       </DefaultLayout>
     </div>

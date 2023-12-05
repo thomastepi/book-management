@@ -13,6 +13,7 @@ const MainMenu = () => {
         <Link to="/update-book">Update Book</Link>
         <Link to="/show-book-author">Search Book by author</Link>
         <Link to="/show-book-price">Search Book by price</Link>
+        <Link to="/quit">Quit</Link>
         <h2>Current Inventory</h2>
         <div>
           <table style={{ margin: "0 auto", border: "1px solid black" }}>
@@ -20,6 +21,7 @@ const MainMenu = () => {
               <tr>
                 <th>Title</th>
                 <th>Author</th>
+                <th>ISBN</th>
                 <th>Price</th>
               </tr>
             </thead>
@@ -28,6 +30,7 @@ const MainMenu = () => {
                 <tr key={index}>
                   <td style={{ border: "1px solid black" }}>{book.title}</td>
                   <td style={{ border: "1px solid black" }}>{book.author}</td>
+                  <td style={{ border: "1px solid black" }}>{book.ISBN}</td>
                   <td style={{ border: "1px solid black" }}>${book.price}</td>
                 </tr>
               ))}
