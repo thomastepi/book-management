@@ -32,19 +32,41 @@ const DeleteBook = () => {
             onChange={(e) => {
               setInputValue(e.target.value);
             }}
-            required            
+            required
           />
           <button type="submit" className="btn">
             Delete book
           </button>
-
-            {bookNumber <= books.length && bookNumber > 0 ? (
-            <ConfirmDeleteBook bookNumber={bookNumber} />
-            ) : (
+          {bookNumber <= books.length && bookNumber > 0 ? (
+            <>
+              <p>
+                You have selected{" "}
+                <em>
+                  <strong>
+                    {books[bookNumber - 1].getAttributeValue("title")}
+                  </strong>
+                </em>{" "}
+                by{" "}
+                <em>
+                  <strong>
+                    {books[bookNumber - 1].getAttributeValue("author")}
+                  </strong>
+                </em>
+              </p>
+              <ConfirmDeleteBook bookNumber={bookNumber} />
+            </>
+          ) : (
             ""
-            )}
-        </form>
+          )}
 
+          {(bookNumber > books.length || bookNumber <= 0) && bookNumber ? (
+            <p>
+              <strong>There is no book with that number. Please try again</strong>
+            </p>
+          ) : (
+            ""
+          )}
+        </form>
         <div style={{ margin: "20px" }}>
           <h2>Current Inventory</h2>
           <table style={{ margin: "0 auto", border: "1px solid black" }}>
