@@ -5,6 +5,7 @@ import Setup from "./components/Setup";
 import MainMenu from "./components/MainMenu";
 import AddBook from "./components/AddBook";
 import UpdateBook from "./components/UpdateBook";
+import DeleteBook from "./components/DeleteBook";
 import Quit from "./components/Quit";
 import QuitMessage from "./components/QuitMessage";
 import SearchBook from "./components/SearchBook";
@@ -24,6 +25,7 @@ function App() {
             <Route path="/main-menu" element={<MainMenu />} />
             <Route path="/add-book" element={<AddBook />} />
             <Route path="/update-book" element={<UpdateBook />} />
+            <Route path="/delete-book" element={<DeleteBook />} />
             <Route path="/search-book" element={<SearchBook />} />
             <Route path="/quit" element={<Quit />} />
             <Route path="/quit-message" element={<QuitMessage />} />

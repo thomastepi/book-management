@@ -10,7 +10,7 @@ const Setup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setMaxBooks(inputValue);
-    info.push(inputValue);
+    info.push(parseInt(inputValue));
     console.log(info);
   };
 

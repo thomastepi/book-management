@@ -72,7 +72,7 @@ const AddBook = () => {
             setBookPrice("");
             setISBN("");
             //navigate("/main-menu");
-          }, 2000);
+          }, 1000);
           return;
         } else {
           alert(
@@ -126,7 +126,7 @@ const AddBook = () => {
           </button>
         </form>
 
-        {numOfBooksToAdd <= maxBooks && numOfBooksToAdd > 0 ? (
+        {parseInt(numOfBooksToAdd) <= maxBooks && numOfBooksToAdd > 0 ? (
           <form className="add-book-form" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="title">Title</label>
