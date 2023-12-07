@@ -8,10 +8,18 @@ const DeleteBook = () => {
   const [bookNumber, setBookNumber] = useState("");
   const [inputValue, setInputValue] = useState("");
 
+  const isValidBookNumber = (BookNum) => {
+    return /^\d+$/.test(BookNum);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (isValidBookNumber(inputValue) === false) {
+        alert("Please enter a valid book number");
+        setInputValue("");
+        return;
+        }
     setBookNumber(inputValue);
-    //books.splice(bookNumber - 1, 1);
     setInputValue("");
   };
 
