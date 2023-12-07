@@ -40,7 +40,7 @@ const ShowBookByPrice = () => {
         setMatchFound(true);
         setPrice("");
         setBookMatches([]);
-      }, 4000);
+      }, 1000);
     }
   };
 

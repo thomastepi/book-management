@@ -3,6 +3,7 @@ import books from "../assets/books";
 import DefaultLayout from "./DefaultLayout";
 import BookClass from "../assets/BookClass";
 import { Link, useNavigate } from "react-router-dom";
+import { message } from "antd";
 import info from "../assets/data";
 import BookContext from "../assets/BookContext";
 
@@ -24,6 +25,11 @@ const AddBook = () => {
     setNumOfBooksToAdd(inputValue);
   };
 
+  function isValidInput(input) {
+    const trimmedInput = input.trim();
+    return trimmedInput !== '';
+  }
+
   const isValidPrice = (value) => {
     const floatValue = parseFloat(value);
     if (!isNaN(floatValue) && floatValue >= 0) {
@@ -39,15 +45,22 @@ const AddBook = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(maxBooks);
+    //console.log(maxBooks);
     if (isValidPrice(bookPrice) === false) {
-      alert("Please enter a valid price");
+      message.error("Please enter a valid price");
       setBookPrice("");
       return;
     }
     if (isValidISBN(ISBN) === false) {
-      alert("Please enter a valid ISBN");
+      message.error("Please enter a valid ISBN");
       setISBN("");
+      return;
+    }
+
+    if (isValidInput(bookTitle) === false || isValidInput(bookAuthor) === false) {
+      message.error("Please enter a valid value");
+      setBookTitle("");
+      setBookAuthor("");
       return;
     }
     var passwd = prompt("Enter password");
@@ -64,18 +77,13 @@ const AddBook = () => {
           );
           setBookInstance(bookInstance);
           books.push(bookInstance);
+          message.success("Book added successfully");
+          bookInstance.displayInfo();
+          console.log("Number of books created in ", bookInstance.findNumberOfCreatedBooks())
           setAddSuccessfull(true);
-          setTimeout(() => {
-            setAddSuccessfull(false);
-            setBookTitle("");
-            setBookAuthor("");
-            setBookPrice("");
-            setISBN("");
-            //navigate("/main-menu");
-          }, 1000);
           return;
         } else {
-          alert(
+          message.error(
             `The inventory already contains the total number of books you indicated.`
           );
           setBookTitle("");
@@ -92,7 +100,8 @@ const AddBook = () => {
       attempts--;
     }
     if (attempts === 0) {
-      alert("You have run out of attempts. Please try again later.");
+      message.error("You have run out of attempts. Please try again later.");
+      //alert("You have run out of attempts. Please try again later.");
       navigate("/main-menu");
     }
   };
@@ -101,8 +110,9 @@ const AddBook = () => {
     setBookTitle("");
     setBookAuthor("");
     setBookPrice("");
+    setAddSuccessfull(false);
     setISBN("");
-  }, []);
+  }, [addSuccessfull]);
 
   return (
     <div className="add-book">
@@ -128,7 +138,7 @@ const AddBook = () => {
 
         {parseInt(numOfBooksToAdd) <= maxBooks && numOfBooksToAdd > 0 ? (
           <form className="add-book-form" onSubmit={handleSubmit}>
-          <h4>Number of books to add: {numOfBooksToAdd}</h4>
+            <h4>Number of books to add: {numOfBooksToAdd}</h4>
             <div>
               <label htmlFor="title">Title</label>
               <input
@@ -212,11 +222,6 @@ const AddBook = () => {
         )}
 
         <div style={{ margin: "20px" }}>
-          {addSuccessfull && (
-            <div>
-              <h3>Book added successfully.</h3>
-            </div>
-          )}
           <table style={{ margin: "0 auto", border: "1px solid black" }}>
             <thead>
               <tr>

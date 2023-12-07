@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import DefaultLayout from "./DefaultLayout";
+import { message } from "antd";
 import books from "../assets/books";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -18,6 +19,11 @@ const UpdateBook = () => {
     setSelectedField(e.target.value);
   };
 
+  function isValidInput(input) {
+    const trimmedInput = input.trim();
+    return trimmedInput !== '';
+  }
+
   const isValidPrice = (value) => {
     const floatValue = parseFloat(value);
     if (!isNaN(floatValue) && floatValue >= 0) {
@@ -34,16 +40,24 @@ const UpdateBook = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isValidPrice(newPrice) === false && newPrice !== "") {
-      alert("Please enter a valid price");
+      message.error("Please enter a valid price");
       setNewPrice("");
       return;
     }
 
     if (isValidISBN(newISBN) === false && newISBN !== "") {
-      alert("Please enter a valid ISBN");
+      message.error("Please enter a valid ISBN");
       setNewISBN("");
       return;
     }
+
+    if (isValidInput(newTitle) === false || isValidInput(newAuthor) === false) {
+      message.error("Please enter a valid value");
+      setNewTitle("");
+      setNewAuthor("");
+      return;
+    }
+
     var passwd = prompt("Enter password");
     var attempts = 3;
 
@@ -104,6 +118,7 @@ const UpdateBook = () => {
         } else {
           console.log("Something went wrong");
         }
+        message.success("Book updated successfully");
         return;
       } else if (attempts > 1) {
         alert(`Incorrect password. You have ${attempts - 1} attempts left.`);
@@ -113,7 +128,7 @@ const UpdateBook = () => {
     }
 
     if (attempts === 0) {
-      alert("You have run out of attempts. Please try again later.");
+      message.error("You have run out of attempts. Please try again later.");
       navigate("/main-menu");
     }
   };
@@ -153,11 +168,20 @@ const UpdateBook = () => {
           </button>
           {bookNumber <= bookList.length && bookNumber > 0 ? (
             <>
-              <h3>
-                You have selected <em> {bookList[bookNumber - 1].title} </em> by
-                <em> {bookList[bookNumber - 1].author}</em>. Price of book:{" "}
-                {<em> ${bookList[bookNumber - 1].price} </em>}
-              </h3>
+              <p style={{ fontSize: "20px" }}>
+                You have selected{" "}
+                <b>
+                  <em> {bookList[bookNumber - 1].title} </em>
+                </b>{" "}
+                by
+                <b>
+                  <em> {bookList[bookNumber - 1].author}</em>
+                </b>
+                . Price of book:
+                <b>
+                  <em> ${bookList[bookNumber - 1].price} </em>
+                </b>
+              </p>
               <div className="update-field-container">
                 <h4>What field would you like to update?</h4>
                 <select value={selectedField} onChange={handleFieldChange}>

@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { message } from "antd";
 import books from "../assets/books";
 
 const ConfirmDeleteBook = (props) => {
@@ -11,6 +12,7 @@ const ConfirmDeleteBook = (props) => {
     while (attempts >= 1) {
       if (passwd === "pargol") {
         books.splice(props.bookNumber - 1, 1);
+        message.success("Book Deleted");
         navigate("/main-menu");
         return;
       } else if (attempts > 1) {
@@ -20,7 +22,7 @@ const ConfirmDeleteBook = (props) => {
       attempts--;
     }
     if (attempts === 0) {
-      alert("You have run out of attempts. Please try again later.");
+      message.error("You have run out of attempts. Please try again later.");
       navigate("/main-menu");
     }
   };

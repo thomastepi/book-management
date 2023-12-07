@@ -17,7 +17,7 @@ class Book {
     return this[attribute];
   }
 
-  static findNumberOfCreatedBooks() {
+  findNumberOfCreatedBooks() {
     return Book.numberOfCreatedBooks;
   }
 

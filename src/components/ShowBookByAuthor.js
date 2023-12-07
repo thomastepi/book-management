@@ -24,7 +24,7 @@ const ShowBookByAuthor = () => {
         setMatchFound(true);
         setAuthorName("");
         setBookMatches([]);
-      }, 4000);
+      }, 1000);
     }
     console.log(bookMatches);
   };
