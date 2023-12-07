@@ -7,7 +7,7 @@ const DefaultLayout = (props) => {
       <div className="header">
         <h1>BookHub!</h1>
       </div>
-      <div className="content">{props.children}</div>
+      <div className="content" style={{overflow: "scroll"}}>{props.children}</div>
       <div className="footer">
         <p>© 2023 BookHub, Inc.</p>
       </div>

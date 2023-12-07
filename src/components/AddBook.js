@@ -72,7 +72,7 @@ const AddBook = () => {
             setBookPrice("");
             setISBN("");
             //navigate("/main-menu");
-          }, 2000);
+          }, 1000);
           return;
         } else {
           alert(

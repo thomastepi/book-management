@@ -134,6 +134,10 @@ const UpdateBook = () => {
     <div className="update-book">
       <DefaultLayout>
         <h1>Update a book</h1>
+        <p>
+          You can update a book by entering its number below. The number of each
+          book is shown in the list of books.
+        </p>
         <div>
           <label htmlFor="book-number">Enter the book number</label>
           <input
