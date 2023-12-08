@@ -7,7 +7,7 @@ const QuitMessage = () => {
     <div className="quit-message">
       <DefaultLayout>
         <h1>Thank you for using the BookHub Inventory System</h1>
-        <Link to="/setup">Return to Setup</Link>
+        <Link to="/home">Return to Home</Link>
       </DefaultLayout>
     </div>
   );

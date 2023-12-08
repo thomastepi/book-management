@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import DefaultLayout from "./DefaultLayout";
+import { message } from "antd";
 import { Link } from "react-router-dom";
 import books from "../assets/books";
 
@@ -7,7 +8,6 @@ const ShowBookByAuthor = () => {
   const [authorName, setAuthorName] = useState("");
   const [bookList] = useState(books);
   const [bookMatches, setBookMatches] = useState([]);
-  const [matchFound, setMatchFound] = useState(true);
   var bookFound = [];
 
   const handleSubmit = (e) => {
@@ -16,15 +16,13 @@ const ShowBookByAuthor = () => {
       if (bookList[i].getAttributeValue("author") === authorName) {
         bookFound.push(bookList[i]);
         setBookMatches(bookFound);
+        setAuthorName("");
       }
     }
     if (bookFound.length === 0) {
-      setMatchFound(false);
-      setTimeout(() => {
-        setMatchFound(true);
-        setAuthorName("");
-        setBookMatches([]);
-      }, 1000);
+      message.warning("No Books Found");
+      setAuthorName("");
+      setBookMatches([]);
     }
     console.log(bookMatches);
   };
@@ -46,7 +44,7 @@ const ShowBookByAuthor = () => {
             Submit
           </button>
         </form>
-        {matchFound ? (
+        {bookMatches.length !== 0 ? (
           <div style={{ margin: "20px" }}>
             <h4>{bookMatches.length} book(s) found</h4>
             <table style={{ margin: "0 auto", border: "1px solid black" }}>
@@ -71,9 +69,11 @@ const ShowBookByAuthor = () => {
             </table>
           </div>
         ) : (
-          <h2>No books found with author name, {authorName}</h2>
+          ""
         )}
-        <Link to="/main-menu">Return to Main Menu</Link>
+        <div style={{ marginTop: "20px" }}>
+          <Link to="/main-menu">Return to Main Menu</Link>
+        </div>
       </DefaultLayout>
     </div>
   );

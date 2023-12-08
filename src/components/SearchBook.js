@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import books from "../assets/books";
 import DefaultLayout from "./DefaultLayout";
 
 const SearchBook = () => {
@@ -7,12 +8,18 @@ const SearchBook = () => {
     <div className="home">
       <DefaultLayout>
         <h1>Search book</h1>
-        <div style={{ margin: "50px" }}>
-        <Link to="/show-book-author">By Author</Link>
-        <Link to="/show-book-price">By Price</Link>
-        </div>
+        {books.length !== 0 ? (
+          <div style={{ margin: "50px" }}>
+            <Link to="/show-book-author">By Author</Link>
+            <Link to="/show-book-price">By Price</Link>
+          </div>
+        ) : (
+          <p style={{ fontSize: "25px" }}>
+            <b>Inventory is currently empty</b>
+          </p>
+        )}
         <div style={{ margin: "20px" }}>
-            <Link to="/main-menu">Back to main menu</Link>
+          <Link to="/main-menu">Back to main menu</Link>
         </div>
       </DefaultLayout>
     </div>

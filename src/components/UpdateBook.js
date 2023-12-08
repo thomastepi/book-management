@@ -21,7 +21,7 @@ const UpdateBook = () => {
 
   function isValidInput(input) {
     const trimmedInput = input.trim();
-    return trimmedInput !== '';
+    return trimmedInput !== "";
   }
 
   const isValidPrice = (value) => {
@@ -40,20 +40,25 @@ const UpdateBook = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isValidPrice(newPrice) === false && newPrice !== "") {
-      message.error("Please enter a valid price");
+      message.warning("Please enter a valid price");
       setNewPrice("");
       return;
     }
 
     if (isValidISBN(newISBN) === false && newISBN !== "") {
-      message.error("Please enter a valid ISBN");
+      message.warning("Please enter a valid ISBN");
       setNewISBN("");
       return;
     }
 
-    if (isValidInput(newTitle) === false || isValidInput(newAuthor) === false) {
-      message.error("Please enter a valid value");
+    if (isValidInput(newTitle) === false && newTitle !== "") {
+      message.warning("Please enter a valid Title");
       setNewTitle("");
+      return;
+    }
+
+    if (isValidInput(newAuthor) === false && newAuthor !== "") {
+      message.warning("Please enter a valid Author");
       setNewAuthor("");
       return;
     }
@@ -154,18 +159,24 @@ const UpdateBook = () => {
           book is shown in the list of books.
         </p>
         <div>
-          <label htmlFor="book-number">Enter the book number</label>
-          <input
-            onChange={(e) => setInputValue(e.target.value)}
-            type="text"
-            name="book-number"
-            id="book-number"
-            value={inputValue}
-            required
-          />
-          <button onClick={handleClick} type="submit" className="btn">
-            Submit
-          </button>
+          {bookList.length === 0 ? (
+            <p style={{fontSize: "25px"}}><b>Inventory is currently empty</b></p>
+          ) : (
+            <div>
+              <label htmlFor="book-number">Enter the book number</label>
+              <input
+                onChange={(e) => setInputValue(e.target.value)}
+                type="text"
+                name="book-number"
+                id="book-number"
+                value={inputValue}
+                required
+              />
+              <button onClick={handleClick} type="submit" className="btn">
+                Submit
+              </button>
+            </div>
+          )}
           {bookNumber <= bookList.length && bookNumber > 0 ? (
             <>
               <p style={{ fontSize: "20px" }}>
@@ -269,33 +280,36 @@ const UpdateBook = () => {
             ""
           )}
         </div>
-
-        <div style={{ margin: "20px" }}>
-          <h2>Current Inventory</h2>
-          <table style={{ margin: "0 auto", border: "1px solid black" }}>
-            <thead>
-              <tr>
-                <th>Number</th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>ISBN</th>
-                <th>Price</th>
-              </tr>
-            </thead>
-            <tbody>
-              {bookList.map((book, index) => (
-                <tr key={index}>
-                  <td style={{ border: "1px solid black" }}>{index + 1}</td>
-                  <td style={{ border: "1px solid black" }}>{book.title}</td>
-                  <td style={{ border: "1px solid black" }}>{book.author}</td>
-                  <td style={{ border: "1px solid black" }}>{book.ISBN}</td>
-                  <td style={{ border: "1px solid black" }}>${book.price}</td>
+        {bookList.length !== 0 && (
+          <div style={{ margin: "20px" }}>
+            <h2>Current Inventory</h2>
+            <table style={{ margin: "0 auto", border: "1px solid black" }}>
+              <thead>
+                <tr>
+                  <th>Number</th>
+                  <th>Title</th>
+                  <th>Author</th>
+                  <th>ISBN</th>
+                  <th>Price</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {bookList.map((book, index) => (
+                  <tr key={index}>
+                    <td style={{ border: "1px solid black" }}>{index + 1}</td>
+                    <td style={{ border: "1px solid black" }}>{book.title}</td>
+                    <td style={{ border: "1px solid black" }}>{book.author}</td>
+                    <td style={{ border: "1px solid black" }}>{book.ISBN}</td>
+                    <td style={{ border: "1px solid black" }}>${book.price}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+        <div style={{ marginTop: "20px" }}>
+          <Link to="/main-menu">Return to Main Menu</Link>
         </div>
-        <Link to="/main-menu">Return to Main Menu</Link>
       </DefaultLayout>
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import DefaultLayout from "./DefaultLayout";
+import { message } from "antd";
 import { Link } from "react-router-dom";
 import books from "../assets/books";
 
@@ -7,7 +8,6 @@ const ShowBookByPrice = () => {
   const [price, setPrice] = useState("");
   const [bookList] = useState(books);
   const [bookMatches, setBookMatches] = useState([]);
-  const [matchFound, setMatchFound] = useState(true);
   var bookFound = [];
 
   const isValidPrice = (value) => {
@@ -22,7 +22,7 @@ const ShowBookByPrice = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isValidPrice(price) === false) {
-      alert("Please enter a valid price");
+      message.warning("Please enter a valid price");
       setPrice("");
       return;
     }
@@ -35,12 +35,9 @@ const ShowBookByPrice = () => {
       }
     }
     if (bookFound.length === 0) {
-      setMatchFound(false);
-      setTimeout(() => {
-        setMatchFound(true);
-        setPrice("");
-        setBookMatches([]);
-      }, 1000);
+      message.warning("No Books Found");
+      setBookMatches([]);
+      setPrice("");
     }
   };
 
@@ -61,7 +58,7 @@ const ShowBookByPrice = () => {
             Submit
           </button>
         </form>
-        {matchFound ? (
+        {bookMatches.length !== 0 && (
           <div style={{ margin: "20px" }}>
             <h4>{bookMatches.length} book(s) found</h4>
             <table style={{ margin: "0 auto", border: "1px solid black" }}>
@@ -85,11 +82,10 @@ const ShowBookByPrice = () => {
               </tbody>
             </table>
           </div>
-        ) : (
-          <h2>No books found with price less than ${price}</h2>
         )}
-
-        <Link to="/main-menu">Return to Main Menu</Link>
+        <div style={{ marginTop: "20px" }}>
+          <Link to="/main-menu">Return to Main Menu</Link>
+        </div>
       </DefaultLayout>
     </div>
   );

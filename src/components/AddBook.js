@@ -27,7 +27,7 @@ const AddBook = () => {
 
   function isValidInput(input) {
     const trimmedInput = input.trim();
-    return trimmedInput !== '';
+    return trimmedInput !== "";
   }
 
   const isValidPrice = (value) => {
@@ -47,25 +47,30 @@ const AddBook = () => {
     e.preventDefault();
     //console.log(maxBooks);
     if (isValidPrice(bookPrice) === false) {
-      message.error("Please enter a valid price");
+      message.warning("Please enter a valid price");
       setBookPrice("");
       return;
     }
     if (isValidISBN(ISBN) === false) {
-      message.error("Please enter a valid ISBN");
+      message.warning("Please enter a valid ISBN");
       setISBN("");
       return;
     }
 
-    if (isValidInput(bookTitle) === false || isValidInput(bookAuthor) === false) {
-      message.error("Please enter a valid value");
+    if (isValidInput(bookTitle) === false) {
+      message.warning("Please enter a valid Title");
       setBookTitle("");
+      return;
+    }
+
+    if (isValidInput(bookAuthor) === false) {
+      message.warning("Please enter a valid Author");
       setBookAuthor("");
       return;
     }
+
     var passwd = prompt("Enter password");
     var attempts = 3;
-
     while (attempts >= 1) {
       if (passwd === "pargol") {
         if (books.length < numOfBooksToAdd) {
@@ -79,11 +84,14 @@ const AddBook = () => {
           books.push(bookInstance);
           message.success("Book added successfully");
           bookInstance.displayInfo();
-          console.log("Number of books created in ", bookInstance.findNumberOfCreatedBooks())
+          console.log(
+            "Number of books created is ",
+            bookInstance.findNumberOfCreatedBooks()
+          );
           setAddSuccessfull(true);
           return;
         } else {
-          message.error(
+          message.warning(
             `The inventory already contains the total number of books you indicated.`
           );
           setBookTitle("");
@@ -101,7 +109,6 @@ const AddBook = () => {
     }
     if (attempts === 0) {
       message.error("You have run out of attempts. Please try again later.");
-      //alert("You have run out of attempts. Please try again later.");
       navigate("/main-menu");
     }
   };
@@ -119,6 +126,7 @@ const AddBook = () => {
       <DefaultLayout>
         <h1>Add a book</h1>
         <h2>Maximum number of books allowed in the inventory: {maxBooks}</h2>
+        <p style={{fontSize: "17px"}}><b>Number of books in the inventory: {books.length}</b></p>
         <form onSubmit={handleSubmit2}>
           <label htmlFor="numOfBooksToAdd">Number of Books to add</label>
           <input
@@ -221,7 +229,7 @@ const AddBook = () => {
           ""
         )}
 
-        <div style={{ margin: "20px" }}>
+        {/* <div style={{ margin: "20px" }}>
           <table style={{ margin: "0 auto", border: "1px solid black" }}>
             <thead>
               <tr>
@@ -242,8 +250,10 @@ const AddBook = () => {
               ))}
             </tbody>
           </table>
+        </div> */}
+        <div style={{ marginTop: "25px" }}>
+          <Link to="/main-menu">Return to Main Menu</Link>
         </div>
-        <Link to="/main-menu">Return to Main Menu</Link>
       </DefaultLayout>
     </div>
   );

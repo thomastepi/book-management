@@ -14,29 +14,32 @@ const MainMenu = () => {
         <Link to="/delete-book">Delete Book</Link>
         <Link to="/search-book">Search Book</Link>
         <Link to="/quit">Quit</Link>
-        <h2>Current Inventory</h2>
-        <div>
-          <table style={{ margin: "0 auto", border: "1px solid black" }}>
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>ISBN</th>
-                <th>Price</th>
-              </tr>
-            </thead>
-            <tbody>
-              {books.map((book, index) => (
-                <tr key={index}>
-                  <td style={{ border: "1px solid black" }}>{book.title}</td>
-                  <td style={{ border: "1px solid black" }}>{book.author}</td>
-                  <td style={{ border: "1px solid black" }}>{book.ISBN}</td>
-                  <td style={{ border: "1px solid black" }}>${book.price}</td>
+        {books.length === 0 }
+        {books.length !== 0 ? (
+          <div>
+            <h2>Current Inventory</h2>
+            <table style={{ margin: "0 auto", border: "1px solid black" }}>
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Author</th>
+                  <th>ISBN</th>
+                  <th>Price</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {books.map((book, index) => (
+                  <tr key={index}>
+                    <td style={{ border: "1px solid black" }}>{book.title}</td>
+                    <td style={{ border: "1px solid black" }}>{book.author}</td>
+                    <td style={{ border: "1px solid black" }}>{book.ISBN}</td>
+                    <td style={{ border: "1px solid black" }}>${book.price}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (<p style={{marginTop: "25px", fontSize: "25px"}}><b>Inventory is currently empty</b></p>)}
       </DefaultLayout>
     </div>
   );
