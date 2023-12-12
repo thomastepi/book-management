@@ -160,7 +160,9 @@ const UpdateBook = () => {
         </p>
         <div>
           {bookList.length === 0 ? (
-            <p style={{fontSize: "25px"}}><b>Inventory is currently empty</b></p>
+            <p style={{ fontSize: "25px" }}>
+              <b>Inventory is currently empty</b>
+            </p>
           ) : (
             <div>
               <label htmlFor="book-number">Enter the book number</label>
@@ -195,7 +197,13 @@ const UpdateBook = () => {
               </p>
               <div className="update-field-container">
                 <h4>What field would you like to update?</h4>
-                <select value={selectedField} onChange={handleFieldChange}>
+                <select
+                  className="form-select"
+                  aria-label="Default select example"
+                  style={{width: "200px"}}
+                  value={selectedField}
+                  onChange={handleFieldChange}
+                >
                   <option value="title">Title</option>
                   <option value="author">Author</option>
                   <option value="ISBN">ISBN</option>
