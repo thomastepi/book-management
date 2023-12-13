@@ -8,6 +8,9 @@ const SearchBook = () => {
     <div className="home">
       <DefaultLayout>
         <h1>Search book</h1>
+        <p style={{ fontSize: "20px" }}>
+          You can search for a book by author or price.
+        </p>
         {books.length !== 0 ? (
           <div style={{ margin: "50px" }}>
             <Link to="/show-book-author">By Author</Link>

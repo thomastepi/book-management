@@ -18,6 +18,9 @@ const Setup = () => {
     <div className="setup">
       <DefaultLayout>
         <h1>Setup</h1>
+        <p style={{ fontSize: "20px" }}>
+          Please enter the maximum number of books that can be stored in the  inventory.
+        </p>
         <form onSubmit={handleSubmit}>
           <label htmlFor="maxNumberOfBooks">Maximum number of books</label>
           <input

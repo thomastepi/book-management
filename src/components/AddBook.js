@@ -126,7 +126,7 @@ const AddBook = () => {
       <DefaultLayout>
         <h1>Add a book</h1>
         <h2>Maximum number of books allowed in the inventory: {maxBooks}</h2>
-        <p style={{fontSize: "17px"}}><b>Number of books in the inventory: {books.length}</b></p>
+        <p style={{fontSize: "25px"}}><b>Current number of books in the inventory: {books.length}</b></p>
         <form onSubmit={handleSubmit2}>
           <label htmlFor="numOfBooksToAdd">Number of Books to add</label>
           <input

@@ -107,7 +107,7 @@ input {
   font-family: inherit;
   font-size: 23px;
   width: 200px;
-  padding: 5px 3px;
+  /* padding: 5px 3px; */
   margin: 8px 0;
   box-sizing: border-box;
   border-radius: 4px;
@@ -150,4 +150,8 @@ a {
 a:hover {
   background: #55533e;
   text-decoration: none;
+}
+
+.main-menu .main-links {
+  margin-top: 30px;
 }

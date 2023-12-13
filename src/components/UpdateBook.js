@@ -154,7 +154,7 @@ const UpdateBook = () => {
     <div className="update-book">
       <DefaultLayout>
         <h1>Update a book</h1>
-        <p>
+        <p style={{fontSize: "20px"}}>
           You can update a book by entering its number below. The number of each
           book is shown in the list of books.
         </p>
@@ -181,7 +181,7 @@ const UpdateBook = () => {
           )}
           {bookNumber <= bookList.length && bookNumber > 0 ? (
             <>
-              <p style={{ fontSize: "20px" }}>
+              <p style={{ fontSize: "25px" }}>
                 You have selected{" "}
                 <b>
                   <em> {bookList[bookNumber - 1].title} </em>

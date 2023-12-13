@@ -28,14 +28,14 @@ const DeleteBook = () => {
     <div>
       <DefaultLayout>
         <h1>Delete a book</h1>
-        <p>
+        <p style={{fontSize: "20px"}}>
           You can delete a book by entering its number below. The number of each
           book is shown in the list of books.
         </p>
         <form onSubmit={handleSubmit}>
         {books.length === 0 ? (<p><b>Inventory is currently empty</b></p>) : (
           <div>
-        <label htmlFor="bookNumber">Book number:</label>
+        <label htmlFor="bookNumber">Book number</label>
           <input
             type="text"
             id="bookNumber"
