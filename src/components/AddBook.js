@@ -5,6 +5,7 @@ import BookClass from "../assets/BookClass";
 import { Link, useNavigate } from "react-router-dom";
 import { message } from "antd";
 import info from "../assets/data";
+import { isValidInput, isValidPrice, isValidISBN } from "../utils/inputValidations";
 import BookContext from "../assets/BookContext";
 
 const AddBook = () => {
@@ -25,23 +26,6 @@ const AddBook = () => {
     setNumOfBooksToAdd(inputValue);
   };
 
-  function isValidInput(input) {
-    const trimmedInput = input.trim();
-    return trimmedInput !== "";
-  }
-
-  const isValidPrice = (value) => {
-    const floatValue = parseFloat(value);
-    if (!isNaN(floatValue) && floatValue >= 0) {
-      const decimalCount = (floatValue.toString().split(".")[1] || "").length;
-      return decimalCount <= 2;
-    }
-    return false;
-  };
-
-  const isValidISBN = (isbn) => {
-    return /^\d+$/.test(isbn);
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();

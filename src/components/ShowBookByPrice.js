@@ -3,6 +3,7 @@ import DefaultLayout from "./DefaultLayout";
 import { message } from "antd";
 import { Link } from "react-router-dom";
 import books from "../assets/books";
+import { isValidPrice } from "../utils/inputValidations";
 
 const ShowBookByPrice = () => {
   const [price, setPrice] = useState("");
@@ -10,20 +11,12 @@ const ShowBookByPrice = () => {
   const [bookMatches, setBookMatches] = useState([]);
   var bookFound = [];
 
-  const isValidPrice = (value) => {
-    const floatValue = parseFloat(value);
-    if (!isNaN(floatValue) && floatValue >= 0) {
-      const decimalCount = (floatValue.toString().split(".")[1] || "").length;
-      return decimalCount <= 2;
-    }
-    return false;
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isValidPrice(price) === false) {
       message.warning("Please enter a valid price");
       setPrice("");
+      setBookMatches([]);
       return;
     }
     for (let i = 0; i < bookList.length; i++) {

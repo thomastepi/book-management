@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import books from "../assets/books";
-import { message } from "antd"
+import { isValidBookNumber } from "../utils/inputValidations";
+import { message } from "antd";
 import DefaultLayout from "./DefaultLayout";
 import ConfirmDeleteBook from "./ConfirmDeleteBook";
 
 const DeleteBook = () => {
   const [bookNumber, setBookNumber] = useState("");
   const [inputValue, setInputValue] = useState("");
-
-  const isValidBookNumber = (BookNum) => {
-    return /^\d+$/.test(BookNum);
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,28 +25,32 @@ const DeleteBook = () => {
     <div>
       <DefaultLayout>
         <h1>Delete a book</h1>
-        <p style={{fontSize: "20px"}}>
+        <p style={{ fontSize: "20px" }}>
           You can delete a book by entering its number below. The number of each
           book is shown in the list of books.
         </p>
         <form onSubmit={handleSubmit}>
-        {books.length === 0 ? (<p><b>Inventory is currently empty</b></p>) : (
-          <div>
-        <label htmlFor="bookNumber">Book number</label>
-          <input
-            type="text"
-            id="bookNumber"
-            value={inputValue}
-            onChange={(e) => {
-              setInputValue(e.target.value);
-            }}
-            required
-          />
-          <button type="submit" className="btn">
-            Delete book
-          </button>
-        </div>
-        )}
+          {books.length === 0 ? (
+            <p>
+              <b>Inventory is currently empty</b>
+            </p>
+          ) : (
+            <div>
+              <label htmlFor="bookNumber">Book number</label>
+              <input
+                type="text"
+                id="bookNumber"
+                value={inputValue}
+                onChange={(e) => {
+                  setInputValue(e.target.value);
+                }}
+                required
+              />
+              <button type="submit" className="btn">
+                Delete book
+              </button>
+            </div>
+          )}
           {bookNumber <= books.length && bookNumber > 0 ? (
             <>
               <p>

@@ -3,6 +3,7 @@ import DefaultLayout from "./DefaultLayout";
 import { message } from "antd";
 import { Link } from "react-router-dom";
 import books from "../assets/books";
+import { isValidInput } from "../utils/inputValidations";
 
 const ShowBookByAuthor = () => {
   const [authorName, setAuthorName] = useState("");
@@ -12,6 +13,12 @@ const ShowBookByAuthor = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (isValidInput(authorName) === false) {
+      message.warning("Please enter a valid author name");
+      setAuthorName("");
+      setBookMatches([]);
+      return;
+    }
     for (let i = 0; i < bookList.length; i++) {
       if (bookList[i].getAttributeValue("author") === authorName) {
         bookFound.push(bookList[i]);
