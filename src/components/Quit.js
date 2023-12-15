@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import DefaultLayout from "./DefaultLayout";
+import DefaultLayout from "./wrapper/DefaultLayout";
 
 const Quit = () => {
   return (
@@ -8,7 +8,7 @@ const Quit = () => {
       <DefaultLayout>
         <h1>Are you sure you want to quit?</h1>
         <div>
-          <p style={{fontSize: "20px"}}>
+          <p style={{ fontSize: "20px" }}>
             If you quit, you will be taken back to setup.
           </p>
         </div>

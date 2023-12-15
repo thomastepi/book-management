@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import books from "../assets/books";
-import DefaultLayout from "./DefaultLayout";
+import books from "../data/books";
+import DefaultLayout from "./wrapper/DefaultLayout";
 
 const SearchBook = () => {
   return (

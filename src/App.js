@@ -11,7 +11,7 @@ import QuitMessage from "./components/QuitMessage";
 import SearchBook from "./components/SearchBook";
 import ShowBookByAuthor from "./components/ShowBookByAuthor";
 import ShowBookByPrice from "./components/ShowBookByPrice";
-import { BookProvider } from "./assets/BookContext";
+import { BookProvider } from "./contexts/BookContext";
 
 function App() {
   return (

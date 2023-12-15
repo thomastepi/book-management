@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import DefaultLayout from "./DefaultLayout";
+import DefaultLayout from "./wrapper/DefaultLayout";
 import { message } from "antd";
 import { Link } from "react-router-dom";
-import books from "../assets/books";
+import books from "../data/books";
 import { isValidInput } from "../utils/inputValidations";
 
 const ShowBookByAuthor = () => {

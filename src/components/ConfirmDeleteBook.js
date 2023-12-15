@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { message } from "antd";
-import books from "../assets/books";
+import books from "../data/books";
 
 const ConfirmDeleteBook = (props) => {
   const navigate = useNavigate();

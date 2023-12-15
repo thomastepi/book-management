@@ -1,12 +1,16 @@
 import React, { useEffect, useState, useContext } from "react";
-import books from "../assets/books";
-import DefaultLayout from "./DefaultLayout";
+import books from "../data/books";
+import DefaultLayout from "./wrapper/DefaultLayout";
 import BookClass from "../assets/BookClass";
 import { Link, useNavigate } from "react-router-dom";
 import { message } from "antd";
-import info from "../assets/data";
-import { isValidInput, isValidPrice, isValidISBN } from "../utils/inputValidations";
-import BookContext from "../assets/BookContext";
+import info from "../data/data";
+import {
+  isValidInput,
+  isValidPrice,
+  isValidISBN,
+} from "../utils/inputValidations";
+import BookContext from "../contexts/BookContext";
 
 const AddBook = () => {
   const [numOfBooksToAdd, setNumOfBooksToAdd] = useState("");
@@ -25,7 +29,6 @@ const AddBook = () => {
     e.preventDefault();
     setNumOfBooksToAdd(inputValue);
   };
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -110,7 +113,9 @@ const AddBook = () => {
       <DefaultLayout>
         <h1>Add a book</h1>
         <h2>Maximum number of books allowed in the inventory: {maxBooks}</h2>
-        <p style={{fontSize: "25px"}}><b>Current number of books in the inventory: {books.length}</b></p>
+        <p style={{ fontSize: "25px" }}>
+          <b>Current number of books in the inventory: {books.length}</b>
+        </p>
         <form onSubmit={handleSubmit2}>
           <label htmlFor="numOfBooksToAdd">Number of Books to add</label>
           <input

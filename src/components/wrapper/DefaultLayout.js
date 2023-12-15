@@ -1,5 +1,5 @@
 import React from "react";
-import "../assets/defaultLayout.css";
+import "../../assets/style/defaultLayout.css";
 
 const DefaultLayout = (props) => {
   return (

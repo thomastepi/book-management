@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import books from "../assets/books";
+import books from "../data/books";
 import { isValidBookNumber } from "../utils/inputValidations";
 import { message } from "antd";
-import DefaultLayout from "./DefaultLayout";
+import DefaultLayout from "./wrapper/DefaultLayout";
 import ConfirmDeleteBook from "./ConfirmDeleteBook";
 
 const DeleteBook = () => {

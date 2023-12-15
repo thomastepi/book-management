@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
-import DefaultLayout from "./DefaultLayout";
+import DefaultLayout from "./wrapper/DefaultLayout";
 import { message } from "antd";
-import books from "../assets/books";
-import { isValidInput, isValidPrice, isValidISBN } from "../utils/inputValidations";
+import books from "../data/books";
+import {
+  isValidInput,
+  isValidPrice,
+  isValidISBN,
+} from "../utils/inputValidations";
 import { Link, useNavigate } from "react-router-dom";
 
 const UpdateBook = () => {
@@ -137,7 +141,7 @@ const UpdateBook = () => {
     <div className="update-book">
       <DefaultLayout>
         <h1>Update a book</h1>
-        <p style={{fontSize: "20px"}}>
+        <p style={{ fontSize: "20px" }}>
           You can update a book by entering its number below. The number of each
           book is shown in the list of books.
         </p>
@@ -183,7 +187,7 @@ const UpdateBook = () => {
                 <select
                   className="form-select"
                   aria-label="Default select example"
-                  style={{width: "200px"}}
+                  style={{ width: "200px" }}
                   value={selectedField}
                   onChange={handleFieldChange}
                 >

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import info from "../assets/data";
-import DefaultLayout from "./DefaultLayout";
+import info from "../data/data";
+import DefaultLayout from "./wrapper/DefaultLayout";
 
 const Setup = () => {
   const [maxBooks, setMaxBooks] = useState("");
@@ -19,7 +19,8 @@ const Setup = () => {
       <DefaultLayout>
         <h1>Setup</h1>
         <p style={{ fontSize: "20px" }}>
-          Please enter the maximum number of books that can be stored in the  inventory.
+          Please enter the maximum number of books that can be stored in the
+          inventory.
         </p>
         <form onSubmit={handleSubmit}>
           <label htmlFor="maxNumberOfBooks">Maximum number of books</label>
