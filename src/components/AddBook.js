@@ -67,6 +67,16 @@ const AddBook = () => {
             ISBN,
             bookPrice
           );
+          for (let i = 0; i < books.length; i++) {
+            if (books[i].equals(bookInstance)) {
+              message.warning("The book already exists in the inventory");
+              setBookTitle("");
+              setBookAuthor("");
+              setBookPrice("");
+              setISBN("");
+              return;
+            }
+          }
           setBookInstance(bookInstance);
           books.push(bookInstance);
           message.success("Book added successfully");
